@@ -1,0 +1,20 @@
+diff a/fav-note/src/serviceWorker.js b/fav-note/src/serviceWorker.js	(rejected hunks)
+@@ -18,3 +18 @@ const isLocalhost = Boolean(
+-    window.location.hostname.match(
+-      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+-    )
++    window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/),
+@@ -46 +44 @@ export function register(config) {
+-              'worker. To learn more, visit https://bit.ly/CRA-PWA'
++              'worker. To learn more, visit https://bit.ly/CRA-PWA',
+@@ -74 +72 @@ function registerValidSW(swUrl, config) {
+-                  'tabs for this page are closed. See https://bit.ly/CRA-PWA.'
++                  'tabs for this page are closed. See https://bit.ly/CRA-PWA.',
+@@ -104 +102 @@ function checkValidServiceWorker(swUrl, config) {
+-    headers: { 'Service-Worker': 'script' }
++    headers: { 'Service-Worker': 'script' },
+@@ -125,3 +123 @@ function checkValidServiceWorker(swUrl, config) {
+-      console.log(
+-        'No internet connection found. App is running in offline mode.'
+-      );
++      console.log('No internet connection found. App is running in offline mode.');
