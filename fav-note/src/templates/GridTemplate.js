@@ -33,7 +33,7 @@ const StyledParagraph = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
-const GridTemplate = ({ children, pageType }) => (
+const GridTemplate = ({ children, pageType, notesCount }) => (
   <UserPageTemplate pageType={pageType}>
     <StyledWrapper>
       <StyledPageHeader>
@@ -41,7 +41,7 @@ const GridTemplate = ({ children, pageType }) => (
         <StyledHeading big as="h1">
           {pageType}
         </StyledHeading>
-        <StyledParagraph> 6 notes </StyledParagraph>
+        <StyledParagraph> {notesCount} notes </StyledParagraph>
       </StyledPageHeader>
       <StyledGrid>{children}</StyledGrid>
     </StyledWrapper>
@@ -51,6 +51,7 @@ const GridTemplate = ({ children, pageType }) => (
 GridTemplate.propTypes = {
   children: PropTypes.arrayOf(PropTypes.object).isRequired,
   pageType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
+  notesCount: PropTypes.number.isRequired,
 };
 
 GridTemplate.defaultProps = {

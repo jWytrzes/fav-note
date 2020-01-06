@@ -1,15 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-// import Button from 'components/atoms/Button/Button';
+import { Provider } from 'react-redux';
 import MainTemplate from 'templates/MainTemplate';
 import Notes from 'views/Notes';
 import Twitters from 'views/Twitters';
 import Articles from 'views/Articles';
 import DetailsPage from 'views/DetailsPage';
 import { routes } from 'routes';
+import store from 'store';
 
 const Root = () => (
-  <div>
+  <Provider store={store}>
     <MainTemplate>
       <BrowserRouter>
         <Switch>
@@ -23,7 +24,7 @@ const Root = () => (
         </Switch>
       </BrowserRouter>
     </MainTemplate>
-  </div>
+  </Provider>
 );
 
 export default Root;
