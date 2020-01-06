@@ -5,11 +5,10 @@ import GridTemplate from 'templates/GridTemplate';
 import Card from 'components/molecules/Card/Card';
 
 const Twitters = ({ twitters }) => (
-  <GridTemplate pageType="twitters" notesCount={twitters.length}>
+  <GridTemplate notesCount={twitters.length}>
     {twitters.map(item => (
       <Card
         id={item.id}
-        cardType="twitters"
         title={item.title}
         content={item.content}
         twitterName={item.twitterName}

@@ -11,8 +11,8 @@ import store from 'store';
 
 const Root = () => (
   <Provider store={store}>
-    <MainTemplate>
-      <BrowserRouter>
+    <BrowserRouter>
+      <MainTemplate>
         <Switch>
           <Route exact path={routes.home} render={() => <Redirect to="/notes" />} />
           <Route exact path={routes.notes} component={Notes} />
@@ -22,8 +22,8 @@ const Root = () => (
           <Route exact path={routes.articles} component={Articles} />
           <Route path={routes.article} component={DetailsPage} />
         </Switch>
-      </BrowserRouter>
-    </MainTemplate>
+      </MainTemplate>
+    </BrowserRouter>
   </Provider>
 );
 

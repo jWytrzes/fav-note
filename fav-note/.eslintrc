@@ -9,6 +9,7 @@
     "document": true
   },
   "rules": {
+    "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": 0,
     "import/no-extraneous-dependencies": 0,
     "import/no-unresolved": 1,
