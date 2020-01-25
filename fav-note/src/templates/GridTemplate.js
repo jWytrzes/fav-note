@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import UserPageTemplate from 'templates/UserPageTemplate';
+import NewItemBar from 'components/organisms/NewItemBar/NewItemBar';
 import Input from 'components/atoms/Input/Input';
 import Heading from 'components/atoms/Heading/Heading';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
+import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
+import plusIcon from 'assets/icons/plus.svg';
 import withContext from 'hoc/withContext';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
+  position: relative;
 `;
 
 const StyledGrid = styled.div`
@@ -42,22 +46,42 @@ const StyledParagraph = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
-const GridTemplate = ({ children, notesCount, pageContext }) => (
-  <UserPageTemplate>
-    <StyledWrapper>
-      <StyledPageHeader>
-        <Input search placeholder="search" />
-        <StyledHeading big as="h1">
-          {pageContext}
-        </StyledHeading>
-        <StyledParagraph>
-          {notesCount} {pageContext}
-        </StyledParagraph>
-      </StyledPageHeader>
-      <StyledGrid>{children}</StyledGrid>
-    </StyledWrapper>
-  </UserPageTemplate>
-);
+const StyledButtonIcon = styled(ButtonIcon)`
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  background-color: ${({ activeColor, theme }) => theme[activeColor]};
+  border-radius: 50px;
+  background-size: 35%;
+  z-index: 10000;
+`;
+
+const GridTemplate = ({ children, notesCount, pageContext }) => {
+  const [isNewItemBarVisible, toggleNewItemBar] = useState(false);
+
+  const handleButtonClick = () => {
+    toggleNewItemBar(!isNewItemBarVisible);
+  };
+
+  return (
+    <UserPageTemplate>
+      <StyledWrapper>
+        <StyledPageHeader>
+          <Input search placeholder="search" />
+          <StyledHeading big as="h1">
+            {pageContext}
+          </StyledHeading>
+          <StyledParagraph>
+            {notesCount} {pageContext}
+          </StyledParagraph>
+        </StyledPageHeader>
+        <StyledGrid>{children}</StyledGrid>
+        <StyledButtonIcon onClick={handleButtonClick} activeColor={pageContext} icon={plusIcon} />
+        <NewItemBar isVisible={isNewItemBarVisible} toggleNewItemBar={handleButtonClick} />
+      </StyledWrapper>
+    </UserPageTemplate>
+  );
+};
 
 GridTemplate.propTypes = {
   children: PropTypes.arrayOf(PropTypes.object).isRequired,
