@@ -104,7 +104,7 @@ class Card extends React.Component {
       <StyledWrapper onClick={this.handleCardClick}>
         <InnerWrapper activeColor={pageContext}>
           <StyledHeading> {title} </StyledHeading>
-          <DateInfo> {created} </DateInfo>
+          {created && <DateInfo> {created} </DateInfo>}
           {pageContext === 'twitters' && (
             <StyledAvatar src={`https://avatars.io/twitter/${twitterName}`} />
           )}
@@ -113,8 +113,7 @@ class Card extends React.Component {
         <InnerWrapper flex>
           <Paragraph>{content}</Paragraph>
           <Button onClick={() => removeItem(pageContext, id)} secondary>
-            {' '}
-            REMOVE{' '}
+            REMOVE
           </Button>
         </InnerWrapper>
       </StyledWrapper>
@@ -123,10 +122,10 @@ class Card extends React.Component {
 }
 
 Card.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
   title: PropTypes.string.isRequired,
-  created: PropTypes.string.isRequired,
+  created: PropTypes.string,
   twitterName: PropTypes.string,
   articleUrl: PropTypes.string,
   content: PropTypes.string.isRequired,
@@ -137,6 +136,7 @@ Card.defaultProps = {
   pageContext: 'notes',
   twitterName: null,
   articleUrl: null,
+  created: '',
 };
 
 const mapDispatchToProps = dispatch => ({

@@ -32,12 +32,7 @@ const StyledLink = styled(Link)`
 
 const RegisterPage = () => (
   <AuthTemplate>
-    <Formik
-      initialValues={{ username: '', password: '' }}
-      // onSubmit={({ username, password }) => {
-      //   console.log('hello');
-      // }}
-    >
+    <Formik initialValues={{ username: '', password: '' }}>
       {({ handleChange, handleBlur, values }) => (
         <>
           <Heading>Sign in</Heading>
