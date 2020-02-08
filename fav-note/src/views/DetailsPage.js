@@ -26,7 +26,7 @@ const DetailsPage = ({ activeItem, match }) => {
         })
         .catch(err => console.log(err));
     }
-  }, [activeItem]);
+  }, [activeItem, match.params]);
 
   return (
     <DetailsTemplate
@@ -45,12 +45,11 @@ DetailsPage.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }).isRequired,
-  activeItem: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    articleUrl: PropTypes.string.isRequired,
-  }).isRequired,
+  activeItem: PropTypes.arrayOf(PropTypes.object),
+};
+
+DetailsPage.defaultProps = {
+  activeItem: undefined,
 };
 
 const mapStateToProps = (state, ownProps) => {

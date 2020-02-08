@@ -8,14 +8,29 @@ export const AUTH_FAILURE = 'AUTH_FAILURE';
 export const FETCH_SUCCESS = 'FETCH_SUCCESS';
 export const FETCH_REQUEST = 'FETCH_REQUEST';
 export const FETCH_FAILURE = 'FETCH_FAILURE';
+export const REMOVE_ITEM_SUCCESS = 'REMOVE_ITEM_SUCCESS';
+export const REMOVE_ITEM_REQUEST = 'REMOVE_ITEM_REQUEST';
+export const REMOVE_ITEM_FAILURE = 'REMOVE_ITEM_FAILURE';
 
-export const removeItem = (itemType, id) => ({
-  type: REMOVE_ITEM,
-  payload: {
-    itemType,
-    id,
-  },
-});
+export const removeItem = (itemType, id) => dispatch => {
+  dispatch({ type: REMOVE_ITEM_REQUEST });
+
+  axios
+    .delete(`http://localhost:9000/api/note/${id}`)
+    .then(() => {
+      dispatch({
+        type: REMOVE_ITEM_SUCCESS,
+        payload: {
+          itemType,
+          id,
+        },
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({ type: REMOVE_ITEM_FAILURE });
+    });
+};
 
 export const addItem = (itemType, itemContent) => {
   const getId = () =>
