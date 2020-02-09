@@ -16,7 +16,7 @@ const Root = () => (
     <BrowserRouter>
       <MainTemplate>
         <Switch>
-          <Route exact path={routes.home} render={() => <Redirect to="/notes" />} />
+          <Route exact path={routes.home} render={() => <Redirect to="/login" />} />
           <Route exact path={routes.notes} component={Notes} />
           <Route path={routes.note} component={DetailsPage} />
           <Route exact path={routes.twitters} component={Twitters} />

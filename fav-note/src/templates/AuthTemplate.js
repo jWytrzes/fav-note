@@ -40,7 +40,7 @@ const AuthTemplate = ({ children }) => (
 );
 
 AuthTemplate.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.object).isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
 };
 
 export default AuthTemplate;

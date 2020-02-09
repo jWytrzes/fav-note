@@ -9,6 +9,7 @@ const Input = styled.input`
   border: none;
   border-radius: 50px;
   font-family: inherit;
+  color: ${({ theme }) => theme.text};
 
   ::placeholder {
     text-transform: uppercase;

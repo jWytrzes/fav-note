@@ -19,6 +19,11 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem;
     font-family: "Montserrat", sans-serif;
   }
+
+  html, body {
+    background-color: ${({ theme }) => theme.bcg};
+    color: ${({ theme }) => theme.text};
+  }
 `;
 
 export default GlobalStyle;

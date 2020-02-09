@@ -4,7 +4,7 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
+  color: ${({ theme }) => theme.text};
   text-decoration: none;
   padding: 0;
   background-color: ${({ activecolor, theme }) => theme[activecolor]};
@@ -16,10 +16,10 @@ const Button = styled.button`
   font-weight: 600;
   font-size: 16px;
   text-transform: uppercase;
-  ${({ secondary }) =>
+  ${({ secondary, theme }) =>
     secondary &&
     css`
-      background-color: hsl(0, 0%, 90%);
+      background-color: ${theme.grey200};
       width: 105px;
       height: 30px;
       font-size: 10px;

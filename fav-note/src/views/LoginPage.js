@@ -22,6 +22,8 @@ const StyledInput = styled(Input)`
   margin: 0 0 30px 0;
   height: 40px;
   width: 300px;
+  background-color: hsl(0, 0%, 96%);
+  color: #333;
 `;
 
 const StyledLink = styled(Link)`
@@ -43,7 +45,7 @@ const LoginPage = ({ userID, authenticate }) => (
     >
       {({ handleChange, handleBlur, values }) => {
         if (userID) {
-          return <Redirect to={routes.home} />;
+          return <Redirect to={routes.notes} />;
         }
 
         return (

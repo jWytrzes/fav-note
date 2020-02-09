@@ -31,7 +31,8 @@ const StyledHeading = styled(Heading)`
 `;
 
 const InnerWrapper = styled.div`
-  background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : 'white')};
+  background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.card)};
+  color: ${({ activeColor, theme }) => (activeColor ? theme.bcg : theme.text)};
   padding: 17px 30px;
   position: relative;
 

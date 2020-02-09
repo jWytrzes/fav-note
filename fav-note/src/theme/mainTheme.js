@@ -6,6 +6,9 @@ export const theme = {
   grey200: 'hsl(0, 0%, 90%)',
   grey300: 'hsl(0, 0%, 70%)',
   black: 'hsl(0, 0%, 0%)',
+  text: 'hsl(0, 0%, 0%)',
+  bcg: 'hsl(255, 100%, 100%)',
+  card: 'hsl(255, 100%, 100%)',
   light: 300,
   bold: 600,
   fontSize: {

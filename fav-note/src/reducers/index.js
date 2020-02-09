@@ -1,7 +1,17 @@
-import { ADD_ITEM_SUCCESS, AUTH_SUCCESS, FETCH_SUCCESS, REMOVE_ITEM_SUCCESS } from 'actions';
+import {
+  ADD_ITEM_SUCCESS,
+  AUTH_SUCCESS,
+  FETCH_SUCCESS,
+  REMOVE_ITEM_SUCCESS,
+  LOGOUT_SUCCESS,
+  REGISTER_SUCCESS,
+} from 'actions';
+import { TOGGLE_THEME } from '../actions';
 
+const theme = localStorage.getItem('DARK_THEME');
 const initialState = {
-  userID: '5e3458ddbe560c2514db71f4',
+  userID: localStorage.getItem('userID') || null,
+  darkTheme: !!(theme === 'true' || theme === null),
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -25,10 +35,30 @@ const rootReducer = (state = initialState, action) => {
         userID: action.payload.data._id,
         /* eslint-enable */
       };
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        /* eslint-disable no-underscore-dangle */
+        userID: action.payload.data._id,
+        /* eslint-enable */
+        redirectToLogin: true,
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        /* eslint-disable no-underscore-dangle */
+        userID: null,
+        /* eslint-enable */
+      };
     case FETCH_SUCCESS:
       return {
         ...state,
         [action.payload.itemType]: [...action.payload.data],
+      };
+    case TOGGLE_THEME:
+      return {
+        ...state,
+        darkTheme: !state.darkTheme,
       };
     default:
       return state;

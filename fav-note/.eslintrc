@@ -6,7 +6,8 @@
   },
   "globals": {
     "window": true,
-    "document": true
+    "document": true,
+    "localStorage": true,
   },
   "rules": {
     "react/jsx-props-no-spreading": "off",

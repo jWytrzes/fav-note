@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
@@ -8,7 +8,10 @@ import logoutIcon from 'assets/icons/logout.svg';
 import penIcon from 'assets/icons/pen.svg';
 import twitterIcon from 'assets/icons/twitter.svg';
 import logoIcon from 'assets/icons/logo.svg';
+import contrastIcon from 'assets/icons/contrastIcon.png';
 import withContext from 'hoc/withContext';
+import { connect } from 'react-redux';
+import { logOut as logOutAction, toggleTheme as toggleThemeAction } from 'actions';
 
 const StyledWrapper = styled.nav`
   position: fixed;
@@ -36,8 +39,11 @@ const StyledLogoLink = styled(NavLink)`
   margin-bottom: 10vh;
 `;
 
-const StyledLogoutButton = styled(ButtonIcon)`
+const StyledBottomWrapper = styled.div`
   margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const StyledLinksList = styled.ul`
@@ -46,30 +52,59 @@ const StyledLinksList = styled.ul`
   list-style: none;
 `;
 
-const Sidebar = ({ pageContext }) => (
-  <StyledWrapper activeColor={pageContext}>
-    <StyledLogoLink to="/" />
-    <StyledLinksList>
-      <li>
-        <ButtonIcon as={NavLink} to="/notes" icon={penIcon} activeclass="active" />
-      </li>
-      <li>
-        <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeclass="active" />
-      </li>
-      <li>
-        <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeclass="active" />
-      </li>
-    </StyledLinksList>
-    <StyledLogoutButton as={NavLink} exact to="/login" icon={logoutIcon} />
-  </StyledWrapper>
-);
+const Sidebar = ({ pageContext, logOut, toggleTheme, darkTheme }) => {
+  const [redirect, setRedirect] = useState(false);
+  const handleLogOut = async () => {
+    await logOut();
+    setRedirect(!redirect);
+  };
+
+  const handleThemeChange = () => {
+    toggleTheme();
+    localStorage.setItem('DARK_THEME', !darkTheme);
+  };
+
+  return (
+    <StyledWrapper activeColor={pageContext}>
+      <StyledLogoLink to="/" />
+      <StyledLinksList>
+        <li>
+          <ButtonIcon as={NavLink} to="/notes" icon={penIcon} activeclass="active" />
+        </li>
+        <li>
+          <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeclass="active" />
+        </li>
+        <li>
+          <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeclass="active" />
+        </li>
+      </StyledLinksList>
+      <StyledBottomWrapper>
+        <ButtonIcon onClick={handleThemeChange} icon={contrastIcon} />
+        <ButtonIcon onClick={handleLogOut} icon={logoutIcon} />
+      </StyledBottomWrapper>
+      {redirect && <Redirect to="/login" />}
+    </StyledWrapper>
+  );
+};
 
 Sidebar.propTypes = {
   pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
+  logOut: PropTypes.func.isRequired,
+  toggleTheme: PropTypes.func.isRequired,
+  darkTheme: PropTypes.bool.isRequired,
 };
 
 Sidebar.defaultProps = {
   pageContext: 'notes',
 };
 
-export default withContext(Sidebar);
+const mapStateToProps = ({ darkTheme }) => ({
+  darkTheme,
+});
+
+const mapDispatchToProps = dispatch => ({
+  logOut: () => dispatch(logOutAction()),
+  toggleTheme: () => dispatch(toggleThemeAction()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withContext(Sidebar));

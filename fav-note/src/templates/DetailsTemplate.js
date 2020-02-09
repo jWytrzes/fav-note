@@ -37,7 +37,7 @@ const StyledLink = styled.a`
   display: block;
   font-weight: ${({ theme }) => theme.bold};
   font-size: ${({ theme }) => theme.fontSize.xs};
-  color: black;
+  color: ${({ theme }) => theme.text};
   text-transform: uppercase;
   margin: 20px 0 50px;
 `;

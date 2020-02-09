@@ -19,7 +19,7 @@ const StyledWrapper = styled.div`
   height: 100vh;
   width: 680px;
   padding: 100px 90px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.bcg};
   border-left: 10px solid ${({ theme, activeColor }) => theme[activeColor]};
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
   transform: translate(${({ isVisible }) => (isVisible ? '0' : '100%')});
@@ -47,8 +47,9 @@ const NewItemBar = ({ pageContext, isVisible, addItem, toggleNewItemBar }) => (
 
     <Formik
       initialValues={{ title: '', content: '', articleUrl: '', twitterName: '', created: '' }}
-      onSubmit={values => {
+      onSubmit={(values, { resetForm }) => {
         addItem(pageContext, values);
+        resetForm();
         toggleNewItemBar();
       }}
     >
